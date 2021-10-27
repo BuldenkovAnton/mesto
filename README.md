@@ -9,7 +9,7 @@
 Сайт поддерживает все современные размеры экрана.
 
 **Demo**
-* [Ссылка на сайт в GitHub Pages](https://buldenkovanton.github.io/mesto/index.html)
+* [Ссылка на сайт в GitHub Pages](https://buldenkovanton.github.io/mesto/)
 
 **Figma**
 
