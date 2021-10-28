@@ -20,52 +20,52 @@
         <img class="avatar profile__avatar" src="./images/avatar.png" alt="Аватар">
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button class="edit-button" title="Редактировать пользователя"></button>
+          <button type="button" class="profile__edit-button" title="Редактировать пользователя"></button>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="add-button" title="Добавить"></button>
+        <button type="button" class="profile__add-button" title="Добавить"></button>
       </section>
       <section class="elements page__elements" aria-label="Элементы">
         <article class="element">
           <img class="element__img" src="./images/element-1.jpg" alt="Карачаевск">
           <div class="element__group">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like like" title="Поставить лайк"></button>
+            <button type="button" class="element__like like" title="Поставить лайк"></button>
           </div> 
         </article>
         <article class="element">
           <img class="element__img" src="./images/element-2.jpg" alt="Гора Эльбрус">
           <div class="element__group">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like like" title="Поставить лайк"></button>
+            <button type="button" class="element__like like" title="Поставить лайк"></button>
           </div> 
         </article>
         <article class="element">
           <img class="element__img" src="./images/element-3.jpg" alt="Домбай">
           <div class="element__group">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like like" title="Поставить лайк"></button>
+            <button type="button" class="element__like like" title="Поставить лайк"></button>
           </div> 
         </article>
         <article class="element">
           <img class="element__img" src="./images/element-2.jpg" alt="Гора Эльбрус">
           <div class="element__group">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like like" title="Поставить лайк"></button>
+            <button type="button" class="element__like like" title="Поставить лайк"></button>
           </div> 
         </article>
         <article class="element">
           <img class="element__img" src="./images/element-3.jpg" alt="Домбай">
           <div class="element__group">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like like" title="Поставить лайк"></button>
+            <button type="button" class="element__like like" title="Поставить лайк"></button>
           </div> 
         </article>
         <article class="element">
           <img class="element__img" src="./images/element-1.jpg" alt="Карачаево-Черкессия">
           <div class="element__group">
             <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__like like" title="Поставить лайк"></button>
+            <button type="button" class="element__like like" title="Поставить лайк"></button>
           </div> 
         </article>
       </section>
@@ -76,14 +76,12 @@
   </div>
   <div class="popup page__popup">
     <div class="popup__container">
-      <button class="popup__close" title="Закрыть"></button>
-      <form class="form popup__form">
+      <button type="button" class="popup__close" title="Закрыть"></button>
+      <form name="avtor_edit" class="form popup__form">
         <h3 class="form__title">Редактировать профиль</h3>
-        <input class="form__input form__input_value_title" type="text" value="Жак-Ив Кусто">
-        <input class="form__input form__input_value_job" type="text" value="Исследователь океана">
-        <button class="form__save">
-          Сохранить
-        </button>
+        <input class="form__input form__input_value_title" type="text" name="avtor_name" value="Жак-Ив Кусто">
+        <input class="form__input form__input_value_job" type="text" name="avtor_job" value="Исследователь океана">
+        <button type="submit" class="form__save">Сохранить</button>
       </form>  
     </div>
   </div>
