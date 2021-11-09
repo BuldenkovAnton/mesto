@@ -13,8 +13,14 @@
     margin: 0 0 48px;
 }
 
-.formp__input:focus {
+.form__input:focus {
    outline: none;
+}
+
+.form__input::placeholder {
+    font-size: 14px;
+    line-height: 17px;
+    color: #C4C4C4;
 }
 
 @media screen and (max-width: 555px){
