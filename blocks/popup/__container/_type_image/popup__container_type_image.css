@@ -1,4 +1,4 @@
-.popup_container_type_image {
+.popup__container_type_image {
     display: flex;
     max-width: 75vw;
     max-height: 75vh;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .popup_container_type_image {
+    .popup__container_type_image {
         max-height: 52vh;
     }
 }
