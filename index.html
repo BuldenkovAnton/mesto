@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="icon" type="image/png" href="./images/favicon.ico">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto Russia</title>
 </head>
@@ -33,37 +33,40 @@
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup page__popup">
+
+  <div class="popup page__popup popup_type_profile">
     <div class="popup__container">
       <button type="button" class="popup__close" title="Закрыть"></button>
-      
+      <form name="avtor_edit" class="form popup__form">
+        <h3 class="form__title">Редактировать профиль</h3>
+        <input class="form__input form__input_value_title" type="text" name="avtor_name" placeholder="Имя">
+        <input class="form__input form__input_value_job" type="text" name="avtor_job" placeholder="Работа">
+        <button type="submit" class="form__save">Сохранить</button>
+      </form>  
     </div>
   </div>
 
-  <template id="popup_image">
-    <figure class="popup__figure">
-      <img class="popup__link">
-      <figcaption class="popup__figcaption"></figcaption>
-    </figure>
-  </template>
+  <div class="popup page__popup popup_type_new-card">
+    <div class="popup__container">
+      <button type="button" class="popup__close" title="Закрыть"></button>
+      <form name="card_add" class="form popup__form">
+        <h3 class="form__title">Новое место</h3>
+        <input class="form__input form__input_value_title" type="text" name="card_name" placeholder="Название">
+        <input class="form__input form__input_value_link" type="text" name="card_link" placeholder="Ссылка на картинку">
+        <button type="submit" class="form__save">Создать</button>
+      </form>  
+    </div>
+  </div>
 
-  <template id="avtor_edit">
-    <form name="avtor_edit" class="form popup__form">
-      <h3 class="form__title">Редактировать профиль</h3>
-      <input class="form__input form__input_value_title" type="text" name="avtor_name">
-      <input class="form__input form__input_value_job" type="text" name="avtor_job">
-      <button type="submit" class="form__save">Сохранить</button>
-    </form>  
-  </template>
-
-  <template id="card_add">
-    <form name="card_add" class="form popup__form">
-      <h3 class="form__title">Новое место</h3>
-      <input class="form__input form__input_value_title" type="text" name="card_name" placeholder="Название">
-      <input class="form__input form__input_value_link" type="text" name="card_link" placeholder="Ссылка на картинку">
-      <button type="submit" class="form__save">Создать</button>
-    </form>  
-  </template>
+  <div class="popup page__popup popup_type_image">
+    <div class="popup__container popup_container_type_image">
+      <button type="button" class="popup__close" title="Закрыть"></button>
+      <figure class="popup__figure">
+        <img class="popup__image">
+        <figcaption class="popup__figcaption"></figcaption>
+      </figure>
+    </div>
+  </div>
 
   <template id="card">
     <article class="element">
