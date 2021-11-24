@@ -83,10 +83,12 @@ function renderStartCards(){
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEscapeHandeler);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEscapeHandeler);
 }
 
 function openProfileEditPopupHandler() {
@@ -168,5 +170,4 @@ popupCardAddCloseButton.addEventListener('click', closeCardAddPopupHandler);
 
 popupImageShowCloseButton.addEventListener('click', closeImageShowPopupHandler);
 
-document.addEventListener('keydown', closePopupByEscapeHandeler);
 document.addEventListener('click', closePopupByOverlayClick);
