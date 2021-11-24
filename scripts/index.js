@@ -91,7 +91,9 @@ function closePopup(popup) {
 
 function openProfileEditPopupHandler() {
     popupProfileEditNameInput.value = profileNameInput.textContent;
+    popupProfileEditNameInput.dispatchEvent(new Event('input'));
     popupProfileEditJobInput.value = profileJobInput.textContent;
+    popupProfileEditJobInput.dispatchEvent(new Event('input'));
     openPopup(popupProfileEditElement);
 }
 
@@ -141,7 +143,6 @@ function closeImageShowPopupHandler() {
 }
 
 renderStartCards();
-
 
 profileEditButton.addEventListener('click', openProfileEditPopupHandler);
 popupProfileEditFormElement.addEventListener('submit', submitProfileEditPopupHandler);
