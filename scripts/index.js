@@ -142,6 +142,20 @@ function closeImageShowPopupHandler() {
     closePopup(popupImageShowElement);
 }
 
+function closePopupByEscapeHandeler(e) {
+    if (e.key === 'Escape') {
+        const currentPopup = document.querySelector('.popup_opened');
+        if (currentPopup) closePopup(currentPopup);
+    } 
+}
+
+function closePopupByOverlayClick(e) {
+    if (e.target.classList.contains('popup_opened')) {
+        closePopup(e.target);
+    } 
+}
+
+
 renderStartCards();
 
 profileEditButton.addEventListener('click', openProfileEditPopupHandler);
@@ -153,3 +167,6 @@ popupCardAddFormElement.addEventListener('submit', submitCardAddPopupHandler);
 popupCardAddCloseButton.addEventListener('click', closeCardAddPopupHandler);
 
 popupImageShowCloseButton.addEventListener('click', closeImageShowPopupHandler);
+
+document.addEventListener('keydown', closePopupByEscapeHandeler);
+document.addEventListener('click', closePopupByOverlayClick);
