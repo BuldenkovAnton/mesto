@@ -48,7 +48,7 @@
 @import "../blocks/popup/__container/_type_image/popup__container_type_image.css";
 @import "../blocks/popup/__input/popup__input.css";
 @import "../blocks/popup/__input/_type/popup__input_type_error.css";
-@import "../blocks/popup/__button_disabled/popup__button_disabled.css";
+@import "../blocks/popup/__button/_disables/popup__button_disabled.css";
 @import "../blocks/popup/__error/popup__error.css";
 @import "../blocks/popup/__error/_visible/popup__error_visible.css";
 @import "../blocks/popup/__figure/popup__figure.css";
