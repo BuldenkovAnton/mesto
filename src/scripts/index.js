@@ -79,27 +79,6 @@ function openProfileEditPopupHandler() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
 
