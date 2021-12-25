@@ -2,6 +2,9 @@
     width: 880px;
     padding: 45px 0 60px;
     margin: 0 auto;
+    display: grid;
+    min-height: calc(100vh - 45px - 60px);
+    grid-template-rows: auto 1fr auto;
 }
 
 @media screen and (max-width:950px) {
@@ -9,5 +12,6 @@
         width: 100%;
         padding: 28px 0 36px;
         margin: 0;
+        min-height: calc(100vh - 28px - 36px);
     }
 }
