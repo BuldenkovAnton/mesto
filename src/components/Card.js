@@ -6,6 +6,8 @@ class Card {
         this._handleCardClick = handleCardClick;
 
         this._element = this._getCardTemplate();
+        this._title = this._element.querySelector('.element__title');
+        this._img = this._element.querySelector('.element__img');
         this._detailButton = this._element.querySelector('.element__show-link');
         this._deleteButton = this._element.querySelector('.trash');
         this._likedButton = this._element.querySelector('.like');
@@ -20,15 +22,15 @@ class Card {
     }
 
     _setEventListener = () => {
-        this._detailButton.addEventListener('click', (e) => this._handleCardClick(this._name, this._link));
-        this._deleteButton.addEventListener('click', (e) => this._element.remove());
+        this._detailButton.addEventListener('click', () => this._handleCardClick(this._name, this._link));
+        this._deleteButton.addEventListener('click', () => this._element.remove());
         this._likedButton.addEventListener('click',  (e) => e.target.classList.toggle('like_active'));
     }
 
     generateCard = () => {  
-        this._element.querySelector('.element__title').textContent = this._name;
-        this._element.querySelector('.element__img').setAttribute('src', this._link);
-        this._element.querySelector('.element__img').setAttribute('alt', this._name);
+        this._title.textContent = this._name;
+        this._img.setAttribute('src', this._link);
+        this._img.setAttribute('alt', this._name);
 
         this._setEventListener();
         return this._element;

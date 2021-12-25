@@ -9,7 +9,7 @@ export default class Popup {
         } 
     }
 
-    _handleOverlayClose = (e) => {  
+    _handleOverlayAndButtonClose = (e) => {  
         if (e.target.classList.contains('popup_opened')) {
             this.close();
         }
@@ -29,6 +29,6 @@ export default class Popup {
     }
 
     setEventListeners() {
-        document.addEventListener('click', this._handleOverlayClose);
+        document.addEventListener('click', this._handleOverlayAndButtonClose);
     }
 }
