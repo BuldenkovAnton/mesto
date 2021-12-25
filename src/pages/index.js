@@ -24,7 +24,7 @@ import FormValidator from '../components/FormValidator.js';
 
 
 function handleCardClick(name, link) {
-    ImagePopup.open(name, link);
+    imagePopup.open(name, link);
 }
 
 function createCard(item) {
@@ -54,7 +54,7 @@ function openAddPopupHandler() {
     addCardPopup.open();
 }
 
-const ImagePopup = new PopupWithImage('.popup_type_image');
+const imagePopup = new PopupWithImage('.popup_type_image');
 
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 
@@ -105,4 +105,4 @@ cardAddButton.addEventListener('click',  openAddPopupHandler);
 
 addCardPopup.setEventListeners();
 editProfilePopup.setEventListeners();
-ImagePopup.setEventListeners();
+imagePopup.setEventListeners();
