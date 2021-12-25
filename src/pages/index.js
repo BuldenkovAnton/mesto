@@ -7,8 +7,6 @@ import {
     popupProfileEditNameInput,
     popupProfileEditJobInput,
     popupCardAddFormElement,
-    popupCardAddNameInput,
-    popupCardAddImageInput,
     formValidators,
     initialCards
 } from '../utils/constants.js';
@@ -39,11 +37,10 @@ const cards = new Section({
       }
 }, '.elements');
 
-const addCardPopup = new PopupWithForm('.popup_type_new-card', (e) => {
-    e.preventDefault(); 
+const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
     const card = {
-        'name': popupCardAddNameInput.value,
-        'link': popupCardAddImageInput.value
+        'name': data.cardName,
+        'link': data.cardLink
     }
     cards.pushItem(createCard(card));
     addCardPopup.close();
@@ -58,10 +55,8 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 
-const editProfilePopup = new PopupWithForm('.popup_type_profile', (e) => {
-    e.preventDefault(); 
-    const inputValues = editProfilePopup.returnInputValues();
-    userInfo.setUserInfo(inputValues.avtor_name, inputValues.avtor_job)
+const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
+    userInfo.setUserInfo(data.avtorName, data.avtorJob)
     editProfilePopup.close();
 });
 
