@@ -12,7 +12,7 @@ export default class Section {
         this._containerSelector.append(item);
     }
 
-    pushItem(item) {
+    unshiftItem(item) {
         this._containerSelector.prepend(item);
     }
 

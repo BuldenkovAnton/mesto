@@ -42,7 +42,7 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
         'name': data.cardName,
         'link': data.cardLink
     }
-    cards.pushItem(createCard(card));
+    cards.unshiftItem(createCard(card));
     addCardPopup.close();
     formValidators[popupCardAddFormElement.name].resetValidation();
 });
