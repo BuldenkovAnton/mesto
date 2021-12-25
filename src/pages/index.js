@@ -33,7 +33,6 @@ function createCard(item) {
 }
 
 const cards = new Section({
-    items: initialCards,
     renderer: (item) => {
         const card = createCard(item);
         cards.addItem(card);
@@ -46,7 +45,7 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (e) => {
         'name': popupCardAddNameInput.value,
         'link': popupCardAddImageInput.value
     }
-    cards.addItem(createCard(card));
+    cards.pushItem(createCard(card));
     addCardPopup.close();
     formValidators[popupCardAddFormElement.name].resetValidation();
 });
@@ -99,7 +98,7 @@ enableValidation({
     errorClass: 'popup__error_visible'
 });
 
-cards.render();
+cards.render(initialCards);
 
 profileEditButton.addEventListener('click', openProfileEditPopupHandler);
 cardAddButton.addEventListener('click',  openAddPopupHandler);
