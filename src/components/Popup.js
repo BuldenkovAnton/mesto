@@ -10,10 +10,7 @@ export default class Popup {
     }
 
     _handleOverlayAndButtonClose = (e) => {  
-        if (e.target.classList.contains('popup_opened')) {
-            this.close();
-        }
-        if (e.target.classList.contains('popup__close')) {
+        if (e.target.classList.contains('popup_opened') || e.target.classList.contains('popup__close')) {
             this.close();
         }
     }
