@@ -27,8 +27,6 @@ export default class PopupWithForm extends Popup {
     
     close() {
         super.close();
-        this._inputElements.forEach((item) => {
-            item.value = '';
-        });
+        this._form.reset();
     }
 }
