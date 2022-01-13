@@ -36,6 +36,7 @@
 @import "../blocks/page/__popup/page__popup.css";
 @import "../blocks/form/form.css";
 @import "../blocks/form/__title/form__title.css";
+@import "../blocks/form/__title/_type/form__title_type_delete.css";
 @import "../blocks/form/__label/form__label.css";
 @import "../blocks/form/__input/form__input.css";
 @import "../blocks/form/__input-error/form__input-error.css";

@@ -23,7 +23,7 @@ import api from '../components/Api.js';
 
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
 function handleGetUserByApi(data) {
-    userInfo.setUserInfo(data.name, data.about, data.avatar);
+    userInfo.setUserInfo(data);
 }
 
 api.getUser(handleGetUserByApi);
@@ -57,7 +57,7 @@ function openProfileEditPopupHandler() {
 
 
 function createCard(item) {
-    const card = new Card(item, '#card', handleCardClick);
+    const card = new Card(userInfo.getUserId(), item, '#card', handleCardClick);
     return card.generateCard();
 }
 

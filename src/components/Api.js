@@ -64,7 +64,7 @@ class Api {
   }
 
   addCard(name, link, addCardHandler){
-    fetch(this._baseUrl + '/cards ', {
+   fetch(this._baseUrl + '/cards ', {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
