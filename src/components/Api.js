@@ -5,6 +5,24 @@ class Api {
     this._headers = options.headers;
   }
 
+  
+  getInitialCards(cardRenderHandler) {
+    return fetch(this._baseUrl + '/cards', {
+      method: 'GET',
+      headers: this._headers
+    })
+    .then((res) => {
+      if (res.ok)
+        return res.json();
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      console.log(data);
+      cardRenderHandler(data);
+    })
+    .catch((err) => console.log(err));
+  }
+
   getUser(getUserHandler) {
     fetch(this._baseUrl + '/users/me', {
       method: 'GET',
@@ -45,24 +63,29 @@ class Api {
     .catch((err) => console.log(err));
   }
 
-  getInitialCards(cardRenderHandler) {
-    return fetch(this._baseUrl + '/cards', {
-      method: 'GET',
-      headers: this._headers
+  addCard(name, link, addCardHandler){
+    fetch(this._baseUrl + '/cards ', {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link
+      })
     })
     .then((res) => {
       if (res.ok)
         return res.json();
+
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((data) => {
       console.log(data);
-      cardRenderHandler(data);
+      addCardHandler(data);
     })
     .catch((err) => console.log(err));
   }
 
-  // другие методы работы с API
+
 }
 
 const api = new Api({

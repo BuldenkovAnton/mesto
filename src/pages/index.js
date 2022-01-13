@@ -74,23 +74,20 @@ function handleCardRender(items) {
 
 api.getInitialCards(handleCardRender);
 
-
-
-
 function handleCardClick(name, link) {
     imagePopup.open(name, link);
 }
 
-
-
-
+function handleAddCard(card){
+    cards.prependItem(createCard(card));
+}
 
 const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
     const card = {
         'name': data.cardName,
         'link': data.cardLink
     }
-    cards.unshiftItem(createCard(card));
+    api.addCard(data.cardName, data.cardLink, handleAddCard);
     addCardPopup.close();
     formValidators[popupCardAddFormElement.name].resetValidation();
 });
