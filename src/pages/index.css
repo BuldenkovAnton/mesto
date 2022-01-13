@@ -28,6 +28,8 @@
 @import "../blocks/element/__trash/element__trash.css";
 @import "../blocks/like/like.css";
 @import "../blocks/like/_active/like_active.css";
+@import "../blocks/like/__button/like__button.css";
+@import "../blocks/like/__count/like__count.css";
 @import "../blocks/trash/trash.css";
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";
