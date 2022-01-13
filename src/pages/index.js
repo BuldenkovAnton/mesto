@@ -29,6 +29,33 @@ function handleGetUserByApi(data) {
 api.getUser(handleGetUserByApi);
 
 
+function handleSetUserInfo(data) {
+    userInfo.setUserInfo(data.name, data.about, data.avatar);
+}
+
+const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
+    api.setUser(data.avtorName, data.avtorJob, handleSetUserInfo)
+    editProfilePopup.close();
+});
+
+function openProfileEditPopupHandler() {
+    const {name, job} = userInfo.getUserInfo();
+    popupProfileEditNameInput.value = name;
+    popupProfileEditJobInput.value = job;
+
+    popupProfileEditNameInput.dispatchEvent(new Event('input'));
+    popupProfileEditJobInput.dispatchEvent(new Event('input'));
+    formValidators[popupProfileEditFormElement.name].resetValidation();
+
+    editProfilePopup.open();
+}
+
+
+
+
+
+
+
 function createCard(item) {
     const card = new Card(item, '#card', handleCardClick);
     return card.generateCard();
@@ -76,22 +103,7 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 
 
 
-const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
-    userInfo.setUserInfo(data.avtorName, data.avtorJob)
-    editProfilePopup.close();
-});
 
-function openProfileEditPopupHandler() {
-    const {name, job} = userInfo.getUserInfo();
-    popupProfileEditNameInput.value = name;
-    popupProfileEditJobInput.value = job;
-
-    popupProfileEditNameInput.dispatchEvent(new Event('input'));
-    popupProfileEditJobInput.dispatchEvent(new Event('input'));
-    formValidators[popupProfileEditFormElement.name].resetValidation();
-
-    editProfilePopup.open();
-}
 
 
 const enableValidation = (config) => {

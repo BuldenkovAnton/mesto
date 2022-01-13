@@ -24,6 +24,27 @@ class Api {
     });
   }
 
+  setUser(name, about, setUserHandler){
+    fetch(this._baseUrl + '/users/me', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about
+      })
+    })
+    .then((res) => {
+      if (res.ok)
+        return res.json();
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      console.log(data);
+      setUserHandler(data);
+    })
+    .catch((err) => console.log(err));
+  }
+
   getInitialCards(cardRenderHandler) {
     return fetch(this._baseUrl + '/cards', {
       method: 'GET',
