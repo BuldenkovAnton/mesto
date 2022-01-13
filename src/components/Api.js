@@ -6,7 +6,7 @@ class Api {
   }
 
   getUser(getUserHandler) {
-    return fetch(this._baseUrl + '/users/me', {
+    fetch(this._baseUrl + '/users/me', {
       method: 'GET',
       headers: this._headers
     })
@@ -24,8 +24,21 @@ class Api {
     });
   }
 
-  getInitialCards() {
-    // ...
+  getInitialCards(cardRenderHandler) {
+    return fetch(this._baseUrl + '/cards', {
+      method: 'GET',
+      headers: this._headers
+    })
+    .then((res) => {
+      if (res.ok)
+        return res.json();
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      console.log(data);
+      cardRenderHandler(data);
+    })
+    .catch((err) => console.log(err));
   }
 
   // другие методы работы с API

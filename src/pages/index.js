@@ -8,7 +8,6 @@ import {
     popupProfileEditJobInput,
     popupCardAddFormElement,
     formValidators,
-    initialCards
 } from '../utils/constants.js';
 
 
@@ -23,20 +22,12 @@ import api from '../components/Api.js';
 
 
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
-function handlerGetUserByApi(data) {
+function handleGetUserByApi(data) {
     userInfo.setUserInfo(data.name, data.about, data.avatar);
 }
 
-api.getUser(handlerGetUserByApi);
+api.getUser(handleGetUserByApi);
 
-
-
-
-
-
-function handleCardClick(name, link) {
-    imagePopup.open(name, link);
-}
 
 function createCard(item) {
     const card = new Card(item, '#card', handleCardClick);
@@ -49,6 +40,23 @@ const cards = new Section({
         cards.addItem(card);
       }
 }, '.elements');
+
+function handleCardRender(items) {
+    cards.render(items);
+}
+
+api.getInitialCards(handleCardRender);
+
+
+
+
+function handleCardClick(name, link) {
+    imagePopup.open(name, link);
+}
+
+
+
+
 
 const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
     const card = {
@@ -106,7 +114,7 @@ enableValidation({
     errorClass: 'popup__error_visible'
 });
 
-cards.render(initialCards);
+
 
 
 
