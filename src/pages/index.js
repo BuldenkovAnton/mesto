@@ -18,6 +18,19 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
+import api from '../components/Api.js';
+
+
+
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
+function handlerGetUserByApi(data) {
+    userInfo.setUserInfo(data.name, data.about, data.avatar);
+}
+
+api.getUser(handlerGetUserByApi);
+
+
+
 
 
 
@@ -53,7 +66,7 @@ function openAddPopupHandler() {
 
 const imagePopup = new PopupWithImage('.popup_type_image');
 
-const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
+
 
 const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
     userInfo.setUserInfo(data.avtorName, data.avtorJob)
@@ -94,6 +107,8 @@ enableValidation({
 });
 
 cards.render(initialCards);
+
+
 
 profileEditButton.addEventListener('click', openProfileEditPopupHandler);
 cardAddButton.addEventListener('click',  openAddPopupHandler);
