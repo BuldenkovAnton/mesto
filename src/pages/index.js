@@ -20,21 +20,16 @@ import FormValidator from '../components/FormValidator.js';
 import api from '../components/Api.js';
 
 
-
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
-function handleGetUserByApi(data) {
-    userInfo.setUserInfo(data);
-}
-
-api.getUser(handleGetUserByApi);
-
-
-function handleSetUserInfo(data) {
-    userInfo.setUserInfo(data.name, data.about, data.avatar);
-}
 
 const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
-    api.setUser(data.avtorName, data.avtorJob, handleSetUserInfo)
+    api.setUser(data.avtorName, data.avtorJob)
+    .then((data) => {
+        console.log(data);
+        userInfo.setUserInfo({ name: data.name, about: data.about});
+      })
+      .catch((err) => console.log(err));
+
     editProfilePopup.close();
 });
 
@@ -50,12 +45,6 @@ function openProfileEditPopupHandler() {
     editProfilePopup.open();
 }
 
-
-
-
-
-
-
 function createCard(item) {
     const card = new Card(userInfo.getUserId(), item, '#card', handleCardClick);
     return card.generateCard();
@@ -68,18 +57,8 @@ const cards = new Section({
       }
 }, '.elements');
 
-function handleCardRender(items) {
-    cards.render(items);
-}
-
-api.getInitialCards(handleCardRender);
-
 function handleCardClick(name, link) {
     imagePopup.open(name, link);
-}
-
-function handleAddCard(card){
-    cards.prependItem(createCard(card));
 }
 
 const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
@@ -87,7 +66,14 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
         'name': data.cardName,
         'link': data.cardLink
     }
-    api.addCard(data.cardName, data.cardLink, handleAddCard);
+
+    api.addCard(data.cardName, data.cardLink)
+        .then((data) => {
+            console.log(data);
+            cards.prependItem(createCard(data));
+        })
+        .catch((err) => console.log(err));
+
     addCardPopup.close();
     formValidators[popupCardAddFormElement.name].resetValidation();
 });
@@ -123,7 +109,19 @@ enableValidation({
     errorClass: 'popup__error_visible'
 });
 
+api.getUser() 
+    .then((data) => {
+        console.log(data);
+        userInfo.setUserInfo(data);
+    })
+    .catch((err) => console.log(err));
 
+api.getInitialCards()
+    .then((data) => {
+        console.log(data);
+        cards.render(data);
+    })
+    .catch((err) => console.log(err));
 
 
 

@@ -6,7 +6,7 @@ class Api {
   }
 
   
-  getInitialCards(cardRenderHandler) {
+  getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
       method: 'GET',
       headers: this._headers
@@ -15,16 +15,11 @@ class Api {
       if (res.ok)
         return res.json();
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      console.log(data);
-      cardRenderHandler(data);
-    })
-    .catch((err) => console.log(err));
+    });
   }
 
-  getUser(getUserHandler) {
-    fetch(this._baseUrl + '/users/me', {
+  getUser() {
+    return fetch(this._baseUrl + '/users/me', {
       method: 'GET',
       headers: this._headers
     })
@@ -32,18 +27,11 @@ class Api {
       if(res.ok) 
         return res.json();
       return Promise.reject(`Ошибка: ${res.status}`);   
-    })
-    .then((data) => {
-      console.log(data);
-      getUserHandler(data);
-    })
-    .catch((err) => {
-      console.log(err);
     });
   }
 
-  setUser(name, about, setUserHandler){
-    fetch(this._baseUrl + '/users/me', {
+  setUser(name, about){
+    return fetch(this._baseUrl + '/users/me', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -55,16 +43,11 @@ class Api {
       if (res.ok)
         return res.json();
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      console.log(data);
-      setUserHandler(data);
-    })
-    .catch((err) => console.log(err));
+    });
   }
 
-  addCard(name, link, addCardHandler){
-   fetch(this._baseUrl + '/cards ', {
+  addCard(name, link){
+   return fetch(this._baseUrl + '/cards ', {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -77,12 +60,7 @@ class Api {
         return res.json();
 
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      console.log(data);
-      addCardHandler(data);
-    })
-    .catch((err) => console.log(err));
+    });
   }
 
 
