@@ -46,7 +46,7 @@ function openProfileEditPopupHandler() {
 }
 
 function createCard(item) {
-    const card = new Card(userInfo.getUserId(), item, '#card', handleCardClick);
+    const card = new Card(userInfo.getUserId(), item, '#card', handleCardClick, handleCardAddLike, handleCardDeleteLike, handleCardDelete);
     return card.generateCard();
 }
 
@@ -59,6 +59,31 @@ const cards = new Section({
 
 function handleCardClick(name, link) {
     imagePopup.open(name, link);
+}
+
+function handleCardAddLike(cardId) {
+    api.addLike(cardId)
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((err) => console.log(err));
+}
+
+function handleCardDeleteLike(cardId) {
+    api.deleteLike(cardId)
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((err) => console.log(err));
+}
+
+function handleCardDelete(cardId) {
+    console.log('delete', cardId);
+    api.deleteCard(cardId)
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((err) => console.log(err));
 }
 
 const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
@@ -83,11 +108,6 @@ function openAddPopupHandler() {
 }
 
 const imagePopup = new PopupWithImage('.popup_type_image');
-
-
-
-
-
 
 const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -114,9 +134,9 @@ api.getUser()
         console.log(data);
         userInfo.setUserInfo(data);
     })
-    .catch((err) => console.log(err));
-
-api.getInitialCards()
+    .then(() => {
+       return api.getInitialCards(); 
+    })
     .then((data) => {
         console.log(data);
         cards.render(data);
