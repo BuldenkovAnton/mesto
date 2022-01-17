@@ -5,6 +5,11 @@ class Api {
     this._headers = options.headers;
   }
 
+  _isSuccess(res) {
+    if (res.ok)
+      return res.json();
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
   
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
@@ -12,9 +17,7 @@ class Api {
       headers: this._headers
     })
     .then((res) => {
-      if (res.ok)
-        return res.json();
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._isSuccess(res);
     });
   }
 
@@ -24,9 +27,7 @@ class Api {
       headers: this._headers
     })
     .then((res) => {
-      if(res.ok) 
-        return res.json();
-      return Promise.reject(`Ошибка: ${res.status}`);   
+      return this._isSuccess(res);
     });
   }
 
@@ -40,9 +41,7 @@ class Api {
       })
     })
     .then((res) => {
-      if (res.ok)
-        return res.json();
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._isSuccess(res);
     });
   }
 
@@ -56,10 +55,7 @@ class Api {
       })
     })
     .then((res) => {
-      if (res.ok)
-        return res.json();
-
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._isSuccess(res);
     });
   }
 
@@ -72,10 +68,7 @@ class Api {
       })
     })
     .then((res) => {
-      if (res.ok)
-        return res.json();
-
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._isSuccess(res);
     });
   }
 
@@ -88,10 +81,7 @@ class Api {
       })
     })
     .then((res) => {
-      if (res.ok)
-        return res.json();
-
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._isSuccess(res);
     });
   }
 
@@ -104,10 +94,20 @@ class Api {
       })
     })
     .then((res) => {
-      if (res.ok)
-        return res.json();
+      return this._isSuccess(res);
+    });
+  }
 
-      return Promise.reject(`Ошибка: ${res.status}`);
+  changeAvatar(avatar){
+    return fetch(this._baseUrl + '/users/me/avatar ', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar
+      })
+    })
+    .then((res) => {
+      return this._isSuccess(res);
     });
   }
 

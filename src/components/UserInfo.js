@@ -21,5 +21,12 @@ export default class UserInfo {
         this._id = data._id;
         this._name.textContent = data.name;
         this._job.textContent = data.about;
+        if (data.avatar) {
+            this._avatar.setAttribute('src', data.avatar);
+        }
+    }
+
+    getAvatar() {
+        return this._avatar.getAttribute('src');
     }
 }

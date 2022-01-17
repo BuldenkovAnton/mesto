@@ -16,7 +16,7 @@
     </header>
    <main class="main page__main">
       <section class="profile page__profile" aria-label="Профиль">
-        <img class="avatar profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар">
+        <img class="avatar profile__avatar" alt="Аватар">
         <div class="profile__info">
           <h1 class="profile__title"></h1>
           <button type="button" class="profile__edit-button" title="Редактировать пользователя"></button>
@@ -54,6 +54,18 @@
       <button type="button" class="popup__close" title="Закрыть"></button>
       <form name="card-delete" class="form popup__form" novalidate>
         <h3 class="form__title form__title_type_delete">Вы уверены?</h3>
+        <input class="form__input form__input_value_id popup__input" type="hidden" name="id" id="id-input">
+        <button type="submit" class="form__save popup__button">Да</button>
+      </form>  
+    </div>
+  </div>
+
+  <div class="popup page__popup popup_type_change-avatar">
+    <div class="popup__container">
+      <button type="button" class="popup__close" title="Закрыть"></button>
+      <form name="avatar-change" class="form popup__form" novalidate>
+        <input class="form__input form__input_value_link popup__input" type="url" name="avatar" id="avatar-input" placeholder="Ссылка на аватар пользователя" required>
+        <span class="form__input-error card-link-input-error popup__error"></span>
         <button type="submit" class="form__save popup__button">Да</button>
       </form>  
     </div>
