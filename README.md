@@ -11,6 +11,7 @@
 **Команды проекта**
 * npm run build - собирает проект. Собранные файлы размещаются в папке dist
 * npm run dev - запускает локальный веб сервер, для разработки проекта.
+* npm run deploy - собераем проект. Содержимое папки dist попадёт в удалённую ветку gh-pages.
 
 **Demo**
 * [Ссылка на сайт в GitHub Pages](https://buldenkovanton.github.io/mesto/)
