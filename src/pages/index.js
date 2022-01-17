@@ -34,8 +34,6 @@ function openProfileEditPopupHandler() {
     popupProfileEditNameInput.value = name;
     popupProfileEditJobInput.value = job;
 
-    popupProfileEditNameInput.dispatchEvent(new Event('input'));
-    popupProfileEditJobInput.dispatchEvent(new Event('input'));
     formValidators[popupProfileEditFormElement.name].resetValidation();
 
     editProfilePopup.open();
@@ -48,12 +46,12 @@ const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
     api.setUser(data.avtorName, data.avtorJob)
     .then((data) => {
         userInfo.setUserInfo(data);
+        editProfilePopup.close();
       })
       .catch((err) => console.log(err))
       .finally(() => {
             popupProfileEditSubmit.textContent = "Сохранить";
             popupProfileEditSubmit.disabled = false;
-            editProfilePopup.close()
         });
 });
 
@@ -65,18 +63,18 @@ function handleCardClick(name, link) {
     imagePopup.open(name, link);
 }
 
-function handleCardAddLike(cardId) {
-    api.addLike(cardId)
+function handleCardAddLike(card) {
+    api.addLike(card.getId())
         .then((data) => {
-            this.updateLikesCard(data.likes);
+            card.updateLikesCard(data.likes);
         })
         .catch((err) => console.log(err));
 }
 
-function handleCardDeleteLike(cardId) {
-    api.deleteLike(cardId)
+function handleCardDeleteLike(card) {
+    api.deleteLike(card.getId())
         .then((data) => {
-            this.updateLikesCard(data.likes);
+            card.updateLikesCard(data.likes);
         })
         .catch((err) => console.log(err));
 }
@@ -114,21 +112,15 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
     popupCardAddSubmit.textContent = "Сохранение...";
     popupCardAddSubmit.disabled = true;
 
-    const card = {
-        'name': data.cardName,
-        'link': data.cardLink
-    }
-
     api.addCard(data.cardName, data.cardLink)
         .then((data) => {
             cards.prependItem(createCard(data));
+            addCardPopup.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
             popupCardAddSubmit.textContent = "Создать";
             popupCardAddSubmit.disabled = false;
-            addCardPopup.close();
-            formValidators[popupCardAddFormElement.name].resetValidation();
         });
 
 });
@@ -141,12 +133,12 @@ const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
     api.deleteCard(data.id)
         .then((res) => {
             document.querySelector('#id-' + data.id).remove();
+            deleteCardPopup.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
             popupDeleteCardSubmit.textContent = "Да";
             popupDeleteCardSubmit.disabled = false;
-            deleteCardPopup.close();
         });
 
 });
@@ -162,13 +154,12 @@ const changeAvatarPopup = new PopupWithForm('.popup_type_change-avatar', (data) 
     api.changeAvatar(data.avatar)
     .then((data) => {
         userInfo.setUserInfo(data);
+        changeAvatarPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
         popupChangeAvatarSubmit.textContent = "Сохранить";
         popupChangeAvatarSubmit.disabled = false;
-        changeAvatarPopup.close();
-        formValidators[popupChangeAvatarFormElement.name].resetValidation();
     });
 });
 
@@ -213,8 +204,14 @@ function loadData() {
 loadData();
 
 profileEditButton.addEventListener('click', openProfileEditPopupHandler);
-cardAddButton.addEventListener('click',  () => addCardPopup.open());
-avatarChangeButton.addEventListener('click', () => changeAvatarPopup.open());
+cardAddButton.addEventListener('click',  () => {
+    formValidators[popupCardAddFormElement.name].resetValidation();
+    addCardPopup.open();
+});
+avatarChangeButton.addEventListener('click', () => {
+    formValidators[popupChangeAvatarFormElement.name].resetValidation();
+    changeAvatarPopup.open();
+});
 
 addCardPopup.setEventListeners();
 editProfilePopup.setEventListeners();

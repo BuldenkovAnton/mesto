@@ -5,7 +5,7 @@ class Api {
     this._headers = options.headers;
   }
 
-  _isSuccess(res) {
+  _checkResponse(res) {
     if (res.ok)
       return res.json();
     return Promise.reject(`Ошибка: ${res.status}`);
@@ -17,7 +17,7 @@ class Api {
       headers: this._headers
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -27,7 +27,7 @@ class Api {
       headers: this._headers
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -41,7 +41,7 @@ class Api {
       })
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -55,7 +55,7 @@ class Api {
       })
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -68,7 +68,7 @@ class Api {
       })
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -81,7 +81,7 @@ class Api {
       })
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -94,7 +94,7 @@ class Api {
       })
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -107,7 +107,7 @@ class Api {
       })
     })
     .then((res) => {
-      return this._isSuccess(res);
+      return this._checkResponse(res);
     });
   }
 

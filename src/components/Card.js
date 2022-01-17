@@ -23,6 +23,10 @@ class Card {
         this._likesCount = this._element.querySelector('.like__count');
     }
 
+    getId() {
+        return this._data._id;
+    }
+
     updateLikesCard(likes){
         this._data.likes = likes;
         this._likesCount.textContent = this._data.likes.length;
@@ -59,9 +63,9 @@ class Card {
         }
         this._likedButton.addEventListener('click',  (e) => {
             if (this._hasLike()){
-                this._handleCardDeleteLike(this._data._id);
+                this._handleCardDeleteLike(this);
             } else {
-                this._handleCardAddLike(this._data._id);
+                this._handleCardAddLike(this);
             }
         });
     }
