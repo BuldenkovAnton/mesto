@@ -3,13 +3,18 @@ import '../pages/index.css';
 import {
     profileEditButton,
     cardAddButton,
+    avatarChangeButton,
     popupProfileEditFormElement,
     popupProfileEditNameInput,
     popupProfileEditJobInput,
+    popupProfileEditSubmit,
     popupCardAddFormElement,
-    popupDeleteCardFormElement,
+    popupCardAddSubmit,
     popupDeleteCardIdHidden,
+    popupDeleteCardSubmit,
     formValidators,
+    popupChangeAvatarFormElement,
+    popupChangeAvatarSubmit
 } from '../utils/constants.js';
 
 
@@ -22,7 +27,7 @@ import FormValidator from '../components/FormValidator.js';
 import api from '../components/Api.js';
 
 
-const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.avatar__image');
 
 function openProfileEditPopupHandler() {
     const {name, job} = userInfo.getUserInfo();
@@ -37,13 +42,21 @@ function openProfileEditPopupHandler() {
 }
 
 const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
+    popupProfileEditSubmit.textContent = "Сохранение...";
+    popupProfileEditSubmit.disabled = true;
+
     api.setUser(data.avtorName, data.avtorJob)
     .then((data) => {
         console.log(data);
         userInfo.setUserInfo(data);
       })
       .catch((err) => console.log(err))
-      .finally(() => editProfilePopup.close());
+      .finally(() => {
+            popupProfileEditSubmit.textContent = "Сохранить";
+            popupProfileEditSubmit.disabled = false;
+            editProfilePopup.close()
+
+        });
 });
 
 
@@ -103,6 +116,9 @@ const cards = new Section({
 const imagePopup = new PopupWithImage('.popup_type_image');
 
 const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
+    popupCardAddSubmit.textContent = "Сохранение...";
+    popupCardAddSubmit.disabled = true;
+
     const card = {
         'name': data.cardName,
         'link': data.cardLink
@@ -115,6 +131,8 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
         })
         .catch((err) => console.log(err))
         .finally(() => {
+            popupCardAddSubmit.textContent = "Создать";
+            popupCardAddSubmit.disabled = false;
             addCardPopup.close();
             formValidators[popupCardAddFormElement.name].resetValidation();
         });
@@ -123,13 +141,18 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
 
 
 const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
-  api.deleteCard(data.id)
+    popupDeleteCardSubmit.textContent = "Удаление...";
+    popupDeleteCardSubmit.disabled = true;
+
+    api.deleteCard(data.id)
         .then((res) => {
             console.log(res);
             document.querySelector('#id-' + data.id).remove();
         })
         .catch((err) => console.log(err))
         .finally(() => {
+            popupDeleteCardSubmit.textContent = "Да";
+            popupDeleteCardSubmit.disabled = false;
             deleteCardPopup.close();
         });
 
@@ -140,20 +163,21 @@ const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
 
 
 const changeAvatarPopup = new PopupWithForm('.popup_type_change-avatar', (data) => {
-    // const card = {
-    //     'name': data.cardName,
-    //     'link': data.cardLink
-    // }
+    popupChangeAvatarSubmit.textContent = "Сохранение...";
+    popupChangeAvatarSubmit.disabled = true;
 
-    // api.addCard(data.cardName, data.cardLink)
-    //     .then((data) => {
-    //         console.log(data);
-    //         cards.prependItem(createCard(data));
-    //     })
-    //     .catch((err) => console.log(err));
-
-    changeAvatarPopup.close();
-    formValidators[popupCardAddFormElement.name].resetValidation();
+    api.changeAvatar(data.avatar)
+    .then((data) => {
+        console.log(data);
+        userInfo.setAvatar(data.avatar);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+        popupChangeAvatarSubmit.textContent = "Сохранить";
+        popupChangeAvatarSubmit.disabled = false;
+        changeAvatarPopup.close();
+        formValidators[popupChangeAvatarFormElement.name].resetValidation();
+    });
 });
 
 
@@ -201,6 +225,7 @@ loadData();
 
 profileEditButton.addEventListener('click', openProfileEditPopupHandler);
 cardAddButton.addEventListener('click',  () => addCardPopup.open());
+avatarChangeButton.addEventListener('click', () => changeAvatarPopup.open());
 
 addCardPopup.setEventListeners();
 editProfilePopup.setEventListeners();

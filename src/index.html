@@ -16,7 +16,10 @@
     </header>
    <main class="main page__main">
       <section class="profile page__profile" aria-label="Профиль">
-        <img class="avatar profile__avatar" alt="Аватар">
+        <div class="avatar profile__avatar">
+          <img class="avatar__image" alt="Аватар">
+        </div>
+    
         <div class="profile__info">
           <h1 class="profile__title"></h1>
           <button type="button" class="profile__edit-button" title="Редактировать пользователя"></button>
@@ -64,9 +67,13 @@
     <div class="popup__container">
       <button type="button" class="popup__close" title="Закрыть"></button>
       <form name="avatar-change" class="form popup__form" novalidate>
-        <input class="form__input form__input_value_link popup__input" type="url" name="avatar" id="avatar-input" placeholder="Ссылка на аватар пользователя" required>
+        <h3 class="form__title">Обновить аватар</h3>
+        <label class="form__label" for="avatar-input">
+          <input class="form__input form__input_value_avatar popup__input" type="url" name="avatar" id="avatar-input" placeholder="Ссылка на аватар пользователя" required>
+          <span class="form__input-error avatar-input-error popup__error "></span>
+        </label>   
         <span class="form__input-error card-link-input-error popup__error"></span>
-        <button type="submit" class="form__save popup__button">Да</button>
+        <button type="submit" class="form__save popup__button">Сохранить</button>
       </form>  
     </div>
   </div>
