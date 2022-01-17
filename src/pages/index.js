@@ -55,7 +55,6 @@ const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
             popupProfileEditSubmit.textContent = "Сохранить";
             popupProfileEditSubmit.disabled = false;
             editProfilePopup.close()
-
         });
 });
 
@@ -169,7 +168,7 @@ const changeAvatarPopup = new PopupWithForm('.popup_type_change-avatar', (data) 
     api.changeAvatar(data.avatar)
     .then((data) => {
         console.log(data);
-        userInfo.setAvatar(data.avatar);
+        userInfo.setUserInfo(data);
     })
     .catch((err) => console.log(err))
     .finally(() => {

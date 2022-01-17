@@ -26,11 +26,4 @@ export default class UserInfo {
         }
     }
 
-    getAvatar() {
-        return this._avatar.getAttribute('src');
-    }
-
-    setAvatar(avatar) {
-        this._avatar.setAttribute('src', avatar);
-    }
 }
