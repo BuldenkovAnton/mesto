@@ -59,10 +59,8 @@ class Card {
         }
         this._likedButton.addEventListener('click',  (e) => {
             if (this._hasLike()){
-                console.log('delete');
                 this._handleCardDeleteLike(this._data._id);
             } else {
-                console.log('like');
                 this._handleCardAddLike(this._data._id);
             }
         });

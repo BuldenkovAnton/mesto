@@ -47,7 +47,6 @@ const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
 
     api.setUser(data.avtorName, data.avtorJob)
     .then((data) => {
-        console.log(data);
         userInfo.setUserInfo(data);
       })
       .catch((err) => console.log(err))
@@ -69,7 +68,6 @@ function handleCardClick(name, link) {
 function handleCardAddLike(cardId) {
     api.addLike(cardId)
         .then((data) => {
-            console.log(data);
             this.updateLikesCard(data.likes);
         })
         .catch((err) => console.log(err));
@@ -78,14 +76,12 @@ function handleCardAddLike(cardId) {
 function handleCardDeleteLike(cardId) {
     api.deleteLike(cardId)
         .then((data) => {
-            console.log(data);
             this.updateLikesCard(data.likes);
         })
         .catch((err) => console.log(err));
 }
 
 function handleCardDelete(cardId) {
-    console.log('delete', cardId);
     popupDeleteCardIdHidden.value = cardId;
     deleteCardPopup.open();
 }
@@ -125,7 +121,6 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
 
     api.addCard(data.cardName, data.cardLink)
         .then((data) => {
-            console.log(data);
             cards.prependItem(createCard(data));
         })
         .catch((err) => console.log(err))
@@ -145,7 +140,6 @@ const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
 
     api.deleteCard(data.id)
         .then((res) => {
-            console.log(res);
             document.querySelector('#id-' + data.id).remove();
         })
         .catch((err) => console.log(err))
@@ -167,7 +161,6 @@ const changeAvatarPopup = new PopupWithForm('.popup_type_change-avatar', (data) 
 
     api.changeAvatar(data.avatar)
     .then((data) => {
-        console.log(data);
         userInfo.setUserInfo(data);
     })
     .catch((err) => console.log(err))
@@ -190,7 +183,6 @@ const enableValidation = (config) => {
         validator.enableValidation();
     });
 
-    console.log(formValidators);
 };
 
 
@@ -206,14 +198,12 @@ enableValidation({
 function loadData() {
     api.getUser() 
     .then((data) => {
-        console.log(data);
         userInfo.setUserInfo(data);
     })
     .then(() => {
        return api.getInitialCards(); 
     })
     .then((data) => {
-        console.log(data);
         cards.render(data);
     })
     .catch((err) => console.log(err));
