@@ -7,14 +7,10 @@ import {
     popupProfileEditFormElement,
     popupProfileEditNameInput,
     popupProfileEditJobInput,
-    popupProfileEditSubmit,
     popupCardAddFormElement,
-    popupCardAddSubmit,
     popupDeleteCardIdHidden,
-    popupDeleteCardSubmit,
     formValidators,
     popupChangeAvatarFormElement,
-    popupChangeAvatarSubmit
 } from '../utils/constants.js';
 
 
@@ -40,8 +36,7 @@ function openProfileEditPopupHandler() {
 }
 
 const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
-    popupProfileEditSubmit.textContent = "Сохранение...";
-    popupProfileEditSubmit.disabled = true;
+    editProfilePopup.renderLoading(true, 'Сохранение...');
 
     api.setUser(data.avtorName, data.avtorJob)
     .then((data) => {
@@ -50,8 +45,7 @@ const editProfilePopup = new PopupWithForm('.popup_type_profile', (data) => {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-            popupProfileEditSubmit.textContent = "Сохранить";
-            popupProfileEditSubmit.disabled = false;
+        editProfilePopup.renderLoading(false);
         });
 });
 
@@ -109,8 +103,7 @@ const cards = new Section({
 const imagePopup = new PopupWithImage('.popup_type_image');
 
 const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
-    popupCardAddSubmit.textContent = "Сохранение...";
-    popupCardAddSubmit.disabled = true;
+    addCardPopup.renderLoading(true, 'Сохранение...');
 
     api.addCard(data.cardName, data.cardLink)
         .then((data) => {
@@ -119,17 +112,14 @@ const addCardPopup = new PopupWithForm('.popup_type_new-card', (data) => {
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            popupCardAddSubmit.textContent = "Создать";
-            popupCardAddSubmit.disabled = false;
+            addCardPopup.renderLoading(false);
         });
 
 });
 
 
 const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
-    popupDeleteCardSubmit.textContent = "Удаление...";
-    popupDeleteCardSubmit.disabled = true;
-
+    deleteCardPopup.renderLoading(true, 'Удаление...');
     api.deleteCard(data.id)
         .then((res) => {
             document.querySelector('#id-' + data.id).remove();
@@ -137,8 +127,7 @@ const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
         })
         .catch((err) => console.log(err))
         .finally(() => {
-            popupDeleteCardSubmit.textContent = "Да";
-            popupDeleteCardSubmit.disabled = false;
+            deleteCardPopup.renderLoading(false, 'Да');
         });
 
 });
@@ -148,9 +137,7 @@ const deleteCardPopup = new PopupWithForm('.popup_type_delete-card', (data) => {
 
 
 const changeAvatarPopup = new PopupWithForm('.popup_type_change-avatar', (data) => {
-    popupChangeAvatarSubmit.textContent = "Сохранение...";
-    popupChangeAvatarSubmit.disabled = true;
-
+    changeAvatarPopup.renderLoading(true, 'Сохранение...');
     api.changeAvatar(data.avatar)
     .then((data) => {
         userInfo.setUserInfo(data);
@@ -158,8 +145,7 @@ const changeAvatarPopup = new PopupWithForm('.popup_type_change-avatar', (data) 
     })
     .catch((err) => console.log(err))
     .finally(() => {
-        popupChangeAvatarSubmit.textContent = "Сохранить";
-        popupChangeAvatarSubmit.disabled = false;
+        changeAvatarPopup.renderLoading(false);
     });
 });
 
